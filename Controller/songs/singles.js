@@ -1,44 +1,33 @@
 const singleModel = require('../../model/singleCatModel');
-const express = require('express');
-const {cloudinary }= require('../../utils/cloudinary');
 
+//UPLOADING SONGS TO THE BACKEND
 
-const app = express();
-
-
-const singles = async(req,res)=>{
-    console.log(req.body);
-    const uploadRes = await cloudinary.v2.uploader
-    .upload(req.body.image,{
-        upload_preset:'cover'
+const uploadSingle=async(req,res)=>{
+    const {musicTitle, artist, music, cover} = req.body;
+    const single = new singleModel({
+        musicTitle,
+        artist,
+        music,
+        cover
     })
-    console.log(uploadRes);
-    if(uploadRes){
-        res.status(200).send({
-          success:true,
-          message:"upload successful 2005648034"
-        })
-      }else{
-        res.send({ success:false, message:"something went wrong"});
-      }
- }
+    try{
+        await single.save();
+        res.status(201).json({message: "Song uploaded successfully", single})
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+}
 
-// const singles = async(req, res)=>{
-//     try{
-//         const fileStr = req.body.data;
-//         // const uploadedRes = await cloudinary.uploader.upload(fileStr,{
-//         //     upload_preset:'cover'
-//         // })
-//         const uploadedRes = await cloudinary.v2.upLoader.upload(fileStr)
-//         .then((res)=>{
-//             upload_preset:'cover'
-//         })
-//         console.log(uploadedRes);
-//         res.json({message:"Uploaded "})
-//     } catch(err) {
-//         console.log(err);
-//         res.status(500).json({err:"Error"})
-//     } 
-// }
+//Getting all songs from the backend
 
-module.exports = {singles}
+const getAllSongs = async(req,res)=>{
+    try{
+        const allSongs = await singleModel.find();
+        res.status(200).json(allSongs)
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+}
+
+
+module.exports = {uploadSingle,getAllSongs}

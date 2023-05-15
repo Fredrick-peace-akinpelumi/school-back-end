@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const singleCat = new Schema({
-    Musictitle:{
+    musicTitle:{
         type: String,
         required: true
     },
@@ -10,11 +10,11 @@ const singleCat = new Schema({
         type: String,
         required: true
     },
-    handleMusic:{
+    music:{
         type: String,
         required: true
     },
-    handleCover:{
+    cover:{
         type: String,
         required: true
     }
