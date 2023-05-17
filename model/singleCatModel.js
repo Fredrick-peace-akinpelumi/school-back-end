@@ -17,6 +17,10 @@ const singleCat = new Schema({
     cover:{
         type: String,
         required: true
+    },
+    genre:{
+        type: String,
+        required: true
     }
 },{timestamps: true})
 const singleModel = mongoose.model('singles', singleCat)

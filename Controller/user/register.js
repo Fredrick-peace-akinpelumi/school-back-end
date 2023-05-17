@@ -1,6 +1,6 @@
 const userModel = require("../../model/userModel");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -51,20 +51,19 @@ const register = async (req, res) => {
        });
    });
  }
-
-
-
 };
 
 const login = async (req, res) => {
   const {email, password, username} = req.body;
   userModel.findOne({ $or: [{email}, {username}]}).then(user => {
     if(user){
-      bcrypt.compare(password, user.password, function (err, result) {
+      bcrypt.compare(password, user.password, async function (err, result) {
         if(result){
+            const token =await jwt.sign({id:user._id}, process.env.JWT_KEY, {expiresIn: "9999999999h"});
           res.status(200).send({
             success:true,
-            message:"Login successful"
+            message:"Login successful",
+            token,
           })
         }else{
           res.send({ success:false, message:"Incorrect password"});
