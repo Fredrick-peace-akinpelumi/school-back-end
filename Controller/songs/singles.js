@@ -39,6 +39,18 @@ const getAllSongs = async(req,res)=>{
     }
 }
 
+// get a single song
+
+const getASong=async(req,res)=>{
+    const id=req.params.songId
+    try {
+        const track=await singleModel.findById(id);
+        res.status(200).json(track);
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
+}
 
 
-module.exports = {uploadSingle,getAllSongs}
+
+module.exports = {uploadSingle,getAllSongs, getASong}
