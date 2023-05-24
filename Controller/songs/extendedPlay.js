@@ -27,4 +27,14 @@ const uploadEp = async (req, res) => {
     
 }
 
+    // const getEpSongs = async(req,res)=>{
+
+    //     try{
+    //         const allSongs = await epModel.find();
+    //         res.status(200).json(allSongs)
+    //     }catch(err){
+    //         res.status(500).json({message: err.message})
+    //     }
+    // }
+
 module.exports = {uploadEp}
