@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const auth = require('./route/auth');
 const songsRoute = require('./route/songsRoute.js');
+const commentsRoute = require('./route/commentsRoute.js');
 
 
 const app = express();
@@ -33,3 +34,4 @@ mongoose.connect(URI).then((connect)=> {
 
 app.use('/api', auth)
 app.use('/api/songs', songsRoute)
+app.use('/api/comments', commentsRoute)

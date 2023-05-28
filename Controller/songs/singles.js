@@ -3,10 +3,11 @@ const singleModel = require('../../model/singleCatModel');
 //UPLOADING SONGS TO THE BACKEND
 
 const uploadSingle=async(req,res)=>{
+    console.log(req.body);
     const {musicTitle, artist, music, cover, genre} = req.body;
     const checkTitle = await singleModel.findOne({musicTitle})
     const checkMusic = await singleModel.findOne({music})
-    if(!musicTitle || !artist || !music || !cover){
+    if(!musicTitle || !artist || !music || !cover || !genre){
         return res.json({message: "All fields are required"})
     }else if (checkTitle || checkMusic) {
         return res.send({status:false, message:"This song already exists"}) 
@@ -18,6 +19,7 @@ const uploadSingle=async(req,res)=>{
             cover,
             genre
         })
+        console.log(single);
         try{
             await single.save();
             res.status(200).json({message: "Song uploaded successfully", single})
