@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const albumCat= new Schema({
-    musicTitle:{
+    albumTitle:{
         type: String,
         required: true
     },
