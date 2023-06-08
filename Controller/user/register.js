@@ -78,31 +78,6 @@ const login = async (req, res) => {
   })
 }
 
-// const login = async (req, res) => {
-//   const { email, password } = req.body;
-//   console.log(req.body);
-//   const checkEmail = await userModel.findOne({ email });
-//   if (checkEmail) {
-//     const checkPassword = await userModel.findOne({ password });
-//    const isValid= bcrypt.compare(password, checkPassword );
-//     if (isValid) {
-//         return res.status(200).json({
-//             success: true,
-//             message: "Login successful",
-//         });
-//     }else if(!isValid) {
-//       return res.status(401).json({
-//           success: false,
-//           message: "Incorrect password",
-//       });
-//     }
-//   } else {
-//     return res.status(401).json({
-//       success: false,
-//       message: "Incorrect email",
-//     });
-//   }
-// };
 
 
 module.exports = { register, login };

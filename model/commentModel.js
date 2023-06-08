@@ -5,7 +5,11 @@ const comment = new Schema({
     Comment:{
         type: String,
         required:true
-    }
+    },
+   musicId:{
+    type: String,
+    required:true
+   }
 },{timestamps:true})
 const commentModel = mongoose.model('comment', comment)
 module.exports = commentModel;

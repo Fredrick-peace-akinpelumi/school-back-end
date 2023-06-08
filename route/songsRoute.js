@@ -1,7 +1,7 @@
 const express=require('express');
 const { uploadEp, getEpSongs } = require('../Controller/songs/extendedPlay.js');
 
-const {uploadSingle, getAllSongs, getASong} = require('../controller/songs/singles.js')
+const {uploadSingle, getAllSongs, getASong} = require('../Controller/songs/singles.js')
 const {uploadAlbum, getAlbumSongs} = require('../Controller/songs/album.js')
 const router = express.Router();
 

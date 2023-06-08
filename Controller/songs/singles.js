@@ -37,7 +37,7 @@ const getAllSongs = async(req,res)=>{
         const allSongs = await singleModel.find();
         res.status(200).json(allSongs)
     }catch(err){
-        res.status(500).json({message: err.message})
+        res.status(500).json({message: "Cannot get songs check connection"})
     }
 }
 
