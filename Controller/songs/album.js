@@ -31,7 +31,7 @@ const getAlbumSongs = async (req, res) => {
         const allSongs = await albumModel.find();
         res.status(200).json(allSongs)
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.send({ message: err.message })
     }
 }
 

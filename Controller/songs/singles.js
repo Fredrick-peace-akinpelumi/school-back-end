@@ -53,6 +53,15 @@ const getASong=async(req,res)=>{
     }
 }
 
+const getSongByUser =async(req,res)=>{
+    const id = req.params.userId;
+    try{
+        const track = await singleModel.findById(userId)
+    } catch(err){
+
+    }
+}
+
 
 
 module.exports = {uploadSingle,getAllSongs, getASong}
