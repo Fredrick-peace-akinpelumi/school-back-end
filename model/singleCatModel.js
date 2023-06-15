@@ -14,6 +14,10 @@ const singleCat = new Schema({
         type: String,
         required: true
     },
+    artistId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    },
     cover:{
         type: String,
         required: true
