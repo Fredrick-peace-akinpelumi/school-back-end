@@ -17,7 +17,10 @@ const userSchema = new Schema({
         required: true
     },
     followers:[
-        {followerId:mongoose.Schema.Types.ObjectId}
+        {type:mongoose.Schema.Types.ObjectId}
+    ],
+    followings:[
+        {type:mongoose.Schema.Types.ObjectId}
     ]
 }, {timestamps:true});
 const userModel = mongoose.model('musicalUser', userSchema)

@@ -4,10 +4,10 @@ const singleModel = require('../../model/singleCatModel');
 
 const uploadSingle=async(req,res)=>{
     console.log(req.body);
-    const {musicTitle, artist, music, cover, genre} = req.body;
+    const {musicTitle, artist, music, cover, genre, artistId} = req.body;
     const checkTitle = await singleModel.findOne({musicTitle})
     const checkMusic = await singleModel.findOne({music})
-    if(!musicTitle || !artist || !music || !cover || !genre){
+    if(!musicTitle || !artist || !music || !cover || !genre || !artistId){
         return res.json({message: "All fields are required"})
     }else if (checkTitle || checkMusic) {
         return res.send({status:false, message:"This song already exists"}) 
@@ -15,6 +15,7 @@ const uploadSingle=async(req,res)=>{
         const single = new singleModel({
             musicTitle,
             artist,
+            artistId,
             music,
             cover,
             genre
@@ -35,7 +36,7 @@ const uploadSingle=async(req,res)=>{
 const getAllSongs = async(req,res)=>{
     try{
         const allSongs = await singleModel.find();
-        res.status(200).json(allSongs)
+        res.status(200).json(allSongs.sort((a,b)=>-1))
     }catch(err){
         res.status(500).json({message: "Cannot get songs check connection"})
     }

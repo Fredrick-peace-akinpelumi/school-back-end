@@ -78,6 +78,36 @@ const login = async (req, res) => {
   })
 }
 
+const followUser= async(req,res)=>{
+  const followerId=req.body.followerId
+  const followingId=req.body.followingId
+
+  console.log(followerId + followingId)
+
+  
+  try{
+    const followUser= await userModel.findById(followerId)
+    console.log(followUser)
+    const followingUser= await userModel.findById(followingId)
+    console.log(followingUser)
+
+    if(followUser.followings.includes(followingId)){
+      console.log(true)
+      await followUser.updateOne({$pull:{followings:followingId}})
+      await followingUser.updateOne({$pull:{followers:followerId}})
+      res.status(200).json({message:"User Unfollowed"})
+    }else{
+      console.log(false)
+      await followUser.updateOne({$push:{followings:followingId}})
+      await followingUser.updateOne({$push:{followers:followerId}})
+      res.status(200).json({message:"User followed"})
+    }
+  } catch(error){
+    console.log(error)
+  }
+
+}
 
 
-module.exports = { register, login };
+
+module.exports = { register, login,followUser };

@@ -10,6 +10,10 @@ const epCat = new Schema({
         type: String,
         required: true
     },
+    artistId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    },
     track:{
         type: Array,
         required: true
