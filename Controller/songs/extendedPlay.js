@@ -1,11 +1,11 @@
 const epModel = require('../../model/epCatModel')
 
 const uploadEp = async (req, res) => {
-    const {epTitle, artist, track, cover, genre} = req.body;
+    const {epTitle, artist, track, cover, genre , artistId} = req.body;
     console.log(req.body)
     const checkTitle = await epModel.findOne({epTitle})
     const checkTracks = await epModel.findOne({track})
-    if(!epTitle || !artist || !track || !cover || !genre){
+    if(!epTitle || !artist || !track || !cover || !genre ||!artistId){
         return res.json({message: "All fields are required"})
     }else if (checkTitle || checkTracks) {
         return res.send({status:false, message:"This EP already exists"}) 
@@ -13,6 +13,7 @@ const uploadEp = async (req, res) => {
         const ep = new epModel({
             epTitle,
             artist,
+            artistId,
             track,
             cover,
             genre
