@@ -15,7 +15,10 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    followers:[
+        {followerId:mongoose.Schema.Types.ObjectId}
+    ]
 }, {timestamps:true});
 const userModel = mongoose.model('musicalUser', userSchema)
 
